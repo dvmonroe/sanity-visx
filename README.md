@@ -2,6 +2,8 @@
 
 Semi-opinionated charting library for Sanity using primitives from [Visx](https://github.com/airbnb/visx).
 
+> [!CAUTION]
+> This library is still in active development and should be used at your own risk. There may be breaking changes without correct semver applied.
 
 ## Features
 
