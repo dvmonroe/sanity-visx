@@ -5,7 +5,7 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "publish-packages": "turbo run build lint --filter=packages/* && changeset version && changeset publish"
+    "publish-packages": "turbo run build lint --filter=studio --filter=ui && changeset version && changeset publish"
   },
   "author": "dvmonroe",
   "license": "MIT",

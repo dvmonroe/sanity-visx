@@ -28,7 +28,8 @@
     "prebuild": "plugin-kit verify-package --silent",
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "dev": "npm run build -- --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "lint": "eslint"
   },
   "dependencies": {
     "@sanity-visx/ui": "0.1.0",
