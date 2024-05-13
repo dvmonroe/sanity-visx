@@ -1,5 +1,3 @@
-import { BarPatternLineOrientation } from "./types";
-
 export const DEFAULT_BACKGROUND = {
   gradient: {
     from: "#fff",

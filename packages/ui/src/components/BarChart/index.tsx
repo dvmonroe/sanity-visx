@@ -42,7 +42,7 @@ export const BarChart = ({
 
   return (
     <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>
-      <LinearGradient id="gradient" from={background.gradient.from} to={background.gradient.to} />
+      <LinearGradient id="gradient" from={background.gradient.from ?? '#fff'} to={background.gradient.to ?? '#fff'} />
       <rect width='100%' height='100%' fill="url(#gradient)" rx={background.borderRadius} />
       {bars.usePatternLines && (
         <PatternLines
@@ -90,8 +90,8 @@ export const BarChart = ({
         <ChartAxis
           orientation={Orientation.left}
           scale={yScale}
-          labelSpacingX={yAxis.labelSpacingX ?? bars.verticalMargin + 20}
-          labelSpacingY={yAxis.labelSpacingY ?? -40}
+          labelSpacingX={yAxis.labelSpacingX ?? -(bars.verticalMargin + 20)}
+          labelSpacingY={yAxis.labelSpacingY ?? 10}
           {...yAxis}
         />
       </Group>

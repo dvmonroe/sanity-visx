@@ -7,6 +7,7 @@ import {
   DEFAULT_TICK_LABEL_FONT_SIZE,
   DEFAULT_TICK_LABEL_TEXT_ANCHOR,
   DEFAULT_TICK_LABEL_FONT_FAMILY,
+  DEFAULT_TICK_STROKE_COLOR,
   DEFAULT_LABEL_COLOR,
   DEFAULT_LABEL_FONT_SIZE,
   DEFAULT_LABEL_FONT_FAMILY,
@@ -24,6 +25,7 @@ interface ChartAxisProps {
   tickLabelFontSize?: number;
   tickLabelTextAnchor?: 'middle' | 'end' | 'start' | 'inherit' | undefined;
   tickLabelFontFamily?: string;
+  tickStrokeColor?: string;
   labelColor?: string;
   labelFontSize?: number;
   labelFontFamily?: string;
@@ -39,6 +41,7 @@ export const ChartAxis = ({
   showLabel = false,
   label,
   axisColor = DEFAULT_AXIS_COLOR,
+  tickStrokeColor = DEFAULT_TICK_STROKE_COLOR,
   tickLabelColor = DEFAULT_TICK_LABEL_COLOR,
   tickLabelFontSize = DEFAULT_TICK_LABEL_FONT_SIZE,
   tickLabelTextAnchor = DEFAULT_TICK_LABEL_TEXT_ANCHOR,
@@ -54,7 +57,7 @@ export const ChartAxis = ({
     scale={scale}
     top={top}
     stroke={axisColor}
-    tickStroke={tickLabelColor}
+    tickStroke={tickStrokeColor}
     tickLabelProps={{
       fill: tickLabelColor,
       fontSize: tickLabelFontSize,

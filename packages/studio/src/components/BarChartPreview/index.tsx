@@ -44,6 +44,22 @@ export const BarChartPreview: UserViewComponent = ({document}) => {
     color: color?.hex,
   };
 
+  const xAxisProps = {
+    ...xAxis,
+    axisColor: xAxis.axisColor?.hex,
+    labelColor: xAxis.labelColor?.hex,
+    tickLabelColor: xAxis.tickLabelColor?.hex,
+    tickStrokeColor: xAxis.tickStrokeColor?.hex,
+  };
+
+  const yAxisProps = {
+    ...yAxis,
+    axisColor: yAxis.axisColor?.hex,
+    labelColor: yAxis.labelColor?.hex,
+    tickLabelColor: yAxis.tickLabelColor?.hex,
+    tickStrokeColor: yAxis.tickStrokeColor?.hex,
+  };
+
   return (
     <Card padding={2}>
       <BarChart
@@ -54,7 +70,7 @@ export const BarChartPreview: UserViewComponent = ({document}) => {
         rightMargin={rightMargin}
         background={backgroundProps}
         bars={barsProps}
-        xAxis={xAxis}
+        xAxis={xAxisProps}
         yAxis={yAxis}
       />
     </Card>

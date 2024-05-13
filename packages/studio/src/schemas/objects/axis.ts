@@ -19,7 +19,7 @@ export const axis = {
     defineField({
       name: 'axisColor',
       title: 'Axis Color',
-      type: 'string',
+      type: 'color',
     }),
     defineField({
       name: 'label',
@@ -31,7 +31,7 @@ export const axis = {
     defineField({
       name: 'labelColor',
       title: 'Label Color',
-      type: 'string',
+      type: 'color',
       fieldset: 'label',
     }),
     defineField({
@@ -68,7 +68,7 @@ export const axis = {
     defineField({
       name: 'tickLabelColor',
       title: 'Tick Label Color',
-      type: 'string',
+      type: 'color',
       fieldset: 'tick',
     }),
     defineField({
@@ -92,7 +92,13 @@ export const axis = {
         list: ['middle', 'end', 'start', 'inherit'],
       },
       fieldset: 'tick',
-    })
+    }),
+    defineField({
+      name: 'tickStrokeColor',
+      title: 'Tick Stroke Color',
+      type: 'color',
+      fieldset: 'tick',
+    }),
   ],
   fieldsets: [
     { name: 'label', title: 'Label' },
