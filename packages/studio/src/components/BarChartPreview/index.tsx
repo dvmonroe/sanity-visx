@@ -10,7 +10,7 @@ const fetchFileUrl = async (id: string, client: SanityClient): Promise<any> => {
 }
 
 export const BarChartPreview: UserViewComponent = ({document}) => {
-  const {displayed: { background, bars, file, xAxis, yAxis, leftMargin, rightMargin }}: any = document
+  const {displayed: { background, bars, file, xAxisKey, yAxisKey, xAxis, yAxis, leftMargin, rightMargin }}: any = document
   const [fileUrl, setFileUrl] = useState<any | null>()
   const client: SanityClient = useClient({apiVersion: '2022-09-01'})
 
@@ -66,6 +66,8 @@ export const BarChartPreview: UserViewComponent = ({document}) => {
         width={500}
         height={400}
         csvFileUrl={fileUrl}
+        xAxisKey={xAxisKey}
+        yAxisKey={yAxisKey}
         leftMargin={leftMargin}
         rightMargin={rightMargin}
         background={backgroundProps}

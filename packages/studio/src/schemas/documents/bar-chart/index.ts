@@ -16,7 +16,7 @@ export const barChart = defineType({
       name: 'xAxis',
       title: 'X Axis',
     },
-        {
+    {
       name: 'yAxis',
       title: 'Y Axis',
     },
@@ -53,16 +53,34 @@ export const barChart = defineType({
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
+      name: 'xAxisKey',
+      title: 'X Axis Key',
+      type: 'string',
+      description: 'The key in the CSV file to use for the x axis.',
+      group: 'core',
+      validation: (Rule: any) => Rule.required(),
+    }),
+    defineField({
+      name: 'yAxisKey',
+      title: 'Y Axis Key',
+      type: 'string',
+      description: 'The key in the CSV file to use for the y axis.',
+      group: 'core',
+      validation: (Rule: any) => Rule.required(),
+    }),
+    defineField({
       name: 'xAxis',
       title: 'X Axis',
       type: 'visx.axis',
       group: 'xAxis',
+      description: 'The x-axis of the bar chart.',
     }),
     defineField({
       name: 'yAxis',
       title: 'Y Axis',
       type: 'visx.axis',
       group: 'yAxis',
+      description: 'The y-axis of the bar chart.',
     }),
     defineField({
       name: 'leftMargin',
@@ -70,6 +88,7 @@ export const barChart = defineType({
       type: 'number',
       initialValue: 10,
       group: 'styling',
+      description: 'The left margin of the bar chart.',
     }),
     defineField({
       name: 'rightMargin',
@@ -77,6 +96,7 @@ export const barChart = defineType({
       type: 'number',
       initialValue: 10,
       group: 'styling',
+      description: 'The right margin of the bar chart.',
     }),
     defineField({
       name: 'bars',
@@ -100,12 +120,14 @@ export const barChart = defineType({
           name: 'color',
           title: 'Bar Color',
           type: 'color',
+          description: 'The color of the bars.',
         }),
         defineField({
           name: 'usePatternLines',
           title: 'Use Pattern Lines',
           type: 'boolean',
           initialValue: false,
+          description: 'Whether to use pattern lines for the bars.',
         }),
         defineField({
           name: 'patternLineOrientation',
@@ -118,7 +140,9 @@ export const barChart = defineType({
               { title: 'Diagonal', value: 'diagonal' },
               { title: 'Diagonal Right to Left', value: 'diagonalRightToLeft' },
             ],
+            layout: 'radio',
           },
+          description: 'The orientation of the pattern lines.',
         }),
         defineField({
           name: 'verticalMargin',

@@ -29,6 +29,8 @@ export type BarsProps = {
   width: number;
   height: number;
   csvFileUrl: string;
+  xAxisKey: string;
+  yAxisKey: string;
   background?: Background;
   bars?: Bars;
   xAxis?: Axis;

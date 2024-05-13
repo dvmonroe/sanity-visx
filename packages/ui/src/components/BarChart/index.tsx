@@ -18,6 +18,8 @@ export const BarChart = ({
   width,
   height,
   csvFileUrl,
+  xAxisKey,
+  yAxisKey,
   background = DEFAULT_BACKGROUND,
   bars = DEFAULT_BARS,
   leftMargin = 10,
@@ -31,12 +33,12 @@ export const BarChart = ({
   const data = useCsvData(csvFileUrl);
 
   const xScale = useBandScale({
-    domain: data.map(d => d[xAxis.label] as string),
+    domain: data.map(d => d[xAxisKey] as string),
     rangeMax: xMax,
     barPadding: bars.padding,
   });
   const yScale = useLinearScale({
-    domainMax: Math.max(...data.map(d => Number(d[yAxis.label]))),
+    domainMax: Math.max(...data.map(d => Number(d[yAxisKey]))),
     rangeMax: yMax,
   });
 
@@ -58,9 +60,9 @@ export const BarChart = ({
         <Grid orientation="rows" scale={yScale} width={xMax} visible={yAxis.showGrid} />
         <Grid orientation="columns" scale={xScale} height={yMax} visible={xAxis.showGrid} />
         {data.map((d: any) => {
-          const xValue = d[xAxis.label];
+          const xValue = d[xAxisKey];
           const barWidth = xScale.bandwidth();
-          const yValue = Number(d[yAxis.label]);
+          const yValue = Number(d[yAxisKey]);
           const scaledYValue = yScale(yValue);
           const barHeight = yMax - (scaledYValue ?? 0);
           const barX = xScale(xValue);
@@ -80,19 +82,21 @@ export const BarChart = ({
           );
         })}
         <ChartAxis
+          {...xAxis}
           orientation={Orientation.bottom}
           scale={xScale}
           top={yMax}
           labelSpacingX={xAxis.labelSpacingX ?? (width / 2) - leftMargin}
           labelSpacingY={xAxis.labelSpacingY ?? 40}
-          {...xAxis}
+          label={xAxis.label ?? xAxisKey}
         />
         <ChartAxis
+          {...yAxis}
           orientation={Orientation.left}
           scale={yScale}
           labelSpacingX={yAxis.labelSpacingX ?? -(bars.verticalMargin + 20)}
           labelSpacingY={yAxis.labelSpacingY ?? 10}
-          {...yAxis}
+          label={yAxis.label ?? yAxisKey}
         />
       </Group>
     </svg>
