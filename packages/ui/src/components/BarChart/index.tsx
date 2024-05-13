@@ -3,32 +3,16 @@ import { Bar } from '@visx/shape';
 import { Group } from '@visx/group';
 import { LinearGradient } from '@visx/gradient';
 import { PatternLines } from "@visx/pattern";
-import { Text } from '@visx/text';
-
+import { Orientation } from '@visx/axis';
 import { BarsProps, BarPatternLineOrientation } from './types';
 import { useCsvData } from '../../hooks/useCsvData';
-import { useXScale, useYScale } from '../../hooks/useScales';
-
-const WHITE = "#fff"
-const BLACK = "#000"
-const DEFAULT_FONT_SIZE = 12
-const DEFAULT_LABEL_PADDING = 10
-
-const DEFAULT_BACKGROUND = {
-  gradient: {
-    from: WHITE,
-    to: WHITE,
-  },
-  borderRadius: 0
-}
-
-const DEFAULT_BARS = {
-  color: BLACK,
-  padding: 0.3,
-  usePatternLines: false,
-  patternLineOrientation: 'diagonal' as BarPatternLineOrientation,
-  verticalMargin: 120,
-}
+import { useBandScale, useLinearScale } from '../../hooks/useScales';
+import { ChartAxis } from '../ChartAxis';
+import { Grid } from '../Grid';
+import { 
+  DEFAULT_BACKGROUND,
+  DEFAULT_BARS,
+} from './constants';
 
 export const BarChart = ({
   width,
@@ -36,27 +20,26 @@ export const BarChart = ({
   csvFileUrl,
   background = DEFAULT_BACKGROUND,
   bars = DEFAULT_BARS,
-  xAxis = {
-    label: 'X Axis',
-    showLabel: false,
-    fontSize: DEFAULT_FONT_SIZE,
-    labelPaddingFromBottom: DEFAULT_LABEL_PADDING,
-  },
-  yAxis = {
-    label: 'Y Axis',
-    showLabel: true,
-    fontSize: DEFAULT_FONT_SIZE,
-    labelPaddingFromLeft: DEFAULT_LABEL_PADDING,
-  },
+  leftMargin = 10,
+  rightMargin = 10,
+  xAxis = { label: 'X Axis' },
+  yAxis = { label: 'Y Axis' },
 }: BarsProps) => {
-  const leftMargin = yAxis.showLabel ? (yAxis.labelPaddingFromLeft ?? 0) : 0;
-  const xMax = width - leftMargin;
+  const topMargin = bars.verticalMargin / 2
+  const xMax = width - leftMargin - rightMargin;
   const yMax = height - bars.verticalMargin;
   const data = useCsvData(csvFileUrl);
-  const xScale = useXScale(data, xMax, xAxis.label, bars.padding);
-  const yScale = useYScale(data, yMax, yAxis.label);
-  
-  console.log(bars)
+
+  const xScale = useBandScale({
+    domain: data.map(d => d[xAxis.label] as string),
+    rangeMax: xMax,
+    barPadding: bars.padding,
+  });
+  const yScale = useLinearScale({
+    domainMax: Math.max(...data.map(d => Number(d[yAxis.label]))),
+    rangeMax: yMax,
+  });
+
   return (
     <svg width="100%" height="100%" viewBox={`0 0 ${width} ${height}`}>
       <LinearGradient id="gradient" from={background.gradient.from} to={background.gradient.to} />
@@ -71,11 +54,13 @@ export const BarChart = ({
           orientation={[bars.patternLineOrientation as BarPatternLineOrientation]}
         />
       )}
-      <Group top={bars.verticalMargin / 2} left={leftMargin}>
+      <Group top={topMargin} left={leftMargin}>
+        <Grid orientation="rows" scale={yScale} width={xMax} visible={yAxis.showGrid} />
+        <Grid orientation="columns" scale={xScale} height={yMax} visible={xAxis.showGrid} />
         {data.map((d: any) => {
           const xValue = d[xAxis.label];
           const barWidth = xScale.bandwidth();
-          const yValue = Number(d[yAxis.label]) * 100;
+          const yValue = Number(d[yAxis.label]);
           const scaledYValue = yScale(yValue);
           const barHeight = yMax - (scaledYValue ?? 0);
           const barX = xScale(xValue);
@@ -94,28 +79,18 @@ export const BarChart = ({
             />
           );
         })}
+        <ChartAxis
+          orientation={Orientation.bottom}
+          scale={xScale}
+          top={yMax}
+          {...xAxis}
+        />
+        <ChartAxis
+          orientation={Orientation.left}
+          scale={yScale}
+          {...yAxis}
+        />
       </Group>
-      {xAxis.showLabel && (
-        <Text
-          x={width / 2}
-          y={height - (xAxis.labelPaddingFromBottom ?? 0)}
-          textAnchor="middle"
-          fontSize={xAxis.fontSize}
-        >
-          {xAxis.label}
-        </Text>
-      )}
-      {yAxis.showLabel && (
-        <Text
-          x={yAxis.labelPaddingFromLeft ?? 0}
-          y={height / 2}
-          transform={`rotate(-90, 15, ${height / 2})`}
-          textAnchor="middle"
-          fontSize={yAxis.fontSize}
-        >
-          {yAxis.label}
-        </Text>
-      )}
     </svg>
   );
 }

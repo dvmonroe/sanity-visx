@@ -2,6 +2,7 @@ interface Axis {
   label: string;
   showLabel?: boolean;
   fontSize?: number;
+  showGrid?: boolean;
 }
 
 interface Background {
@@ -28,6 +29,8 @@ export type BarsProps = {
   csvFileUrl: string;
   background?: Background;
   bars?: Bars;
-  xAxis?: Axis & { labelPaddingFromBottom?: number };
-  yAxis?: Axis & { labelPaddingFromLeft?: number };
+  xAxis?: Axis;
+  yAxis?: Axis;
+  leftMargin?: number;
+  rightMargin?: number;
 };

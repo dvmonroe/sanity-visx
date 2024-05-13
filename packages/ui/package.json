@@ -22,7 +22,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@visx/axis": "^3.10.1",
     "@visx/gradient": "^3.3.0",
+    "@visx/grid": "^3.5.0",
     "@visx/group": "^3.3.0",
     "@visx/pattern": "^3.3.0",
     "@visx/scale": "^3.5.0",

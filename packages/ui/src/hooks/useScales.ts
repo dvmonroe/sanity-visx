@@ -1,25 +1,50 @@
 import { useMemo } from 'react';
 import { scaleBand, scaleLinear } from '@visx/scale';
 
-export const useXScale = (data: Record<string | number, string | number>[], xMax: number, xAxisKey: string, barPadding: number) => {
+interface LinearScaleProps {
+  domainMin?: number;
+  domainMax: number;
+  rangeMin?: number;
+  rangeMax: number;
+}
+
+interface BandScaleProps {
+  domain: string[];
+  rangeMin?: number;
+  rangeMax: number;
+  barPadding?: number;
+}
+
+export const useBandScale = ({
+  domain = [],
+  rangeMin = 0,
+  rangeMax,
+  barPadding = 0.1
+}: BandScaleProps) => {
   return useMemo(
     () => scaleBand<string>({
-      domain: data.map(d => d[xAxisKey] as string),
+      domain: domain,
       round: true,
-      range: [0, xMax],
-      padding: barPadding
+      range: [rangeMin, rangeMax],
+      padding: barPadding,
     }),
-    [xMax, data, xAxisKey, barPadding],
+    [domain, rangeMin, rangeMax, barPadding],
   );
 }
 
-export const useYScale = (data: Record<string | number, string | number>[], yMax: number, yAxisKey: string) => {
+export const useLinearScale = ({
+  domainMin = 0,
+  domainMax,
+  rangeMin = 0,
+  rangeMax
+}: LinearScaleProps) => {
   return useMemo(
     () => scaleLinear<number>({
-      domain: [0, Math.max(...data.map(d => Number(d[yAxisKey]) * 100))],
-      range: [yMax, 0],
+      domain: [domainMin, domainMax],
+      range: [rangeMax, rangeMin],
       round: true,
+      nice: true,
     }),
-    [yMax, data, yAxisKey],
+    [domainMin, domainMax, rangeMin, rangeMax],
   );
 }

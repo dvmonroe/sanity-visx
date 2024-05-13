@@ -20,3 +20,10 @@ export const fontSizeField = defineField({
   type: 'number',
   initialValue: 12,
 });
+
+export const showGridField = defineField({
+  name: 'showGrid',
+  title: 'Show Grid',
+  type: 'boolean',
+  initialValue: false,
+});

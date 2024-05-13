@@ -1,1 +1,3 @@
-export type ChartType = 'barChart';
+import { chartTypes } from './schemas';
+
+export type ChartType = typeof chartTypes[number];

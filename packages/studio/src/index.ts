@@ -1,5 +1,5 @@
 import {definePlugin} from 'sanity'
-import { barChart } from './schemas'
+import { objects, documents } from './schemas'
 import { visxStructure } from './structure'
 import {colorInput} from '@sanity/color-input'
 import { ChartType } from './types'
@@ -22,13 +22,15 @@ interface visxChartsConfig {
  * ```
  */
 const visxCharts = definePlugin<visxChartsConfig>((config = {}) => {
-  const allTypes: Record<ChartType, any> = { barChart };
-
   const types = config && 'types' in config 
     ? config.types
-      ?.filter(schema => schema !== null)
-      .map(schema => schema && allTypes[schema]) 
-    : Object.values(allTypes);
+      ?.map(type => Object.values(documents).find((doc: any) => doc.name === `visx.${type}`))
+    : Object.values(documents);
+
+  const schemasTypes: any[] = [
+    ...(types || []),
+    ...Object.values(objects),
+  ];
 
   return {
     name: 'sanity-plugin-visx',
@@ -36,7 +38,7 @@ const visxCharts = definePlugin<visxChartsConfig>((config = {}) => {
       colorInput()
     ],
     schema: {
-      types
+      types: schemasTypes,
     }
   }
 })

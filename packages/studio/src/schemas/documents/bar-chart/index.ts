@@ -1,6 +1,12 @@
 import { defineType, defineField } from 'sanity';
-import { BarChartIcon } from '../../icons'
-import { labelField, showLabelField, fontSizeField } from './fields';
+import { BarChartIcon } from '../../../icons'
+
+import { 
+  fontSizeField,
+  labelField,
+  showGridField,
+  showLabelField,
+} from './fields';
 
 export const barChart = defineType({
   type: 'document',
@@ -24,6 +30,7 @@ export const barChart = defineType({
       title: 'Title',
       type: 'string',
       group: 'data',
+      description: 'Title for the chart.',
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
@@ -31,6 +38,7 @@ export const barChart = defineType({
       title: 'Caption',
       type: 'string',
       group: 'data',
+      description: 'Caption for the chart.',
     }),
     defineField({
       name: 'file',
@@ -50,13 +58,9 @@ export const barChart = defineType({
       group: 'data',
       fields: [
         labelField,
-        showLabelField,
         fontSizeField,
-        defineField({
-          name: 'labelPaddingFromBottom',
-          title: 'Label Padding From Bottom',
-          type: 'number',
-        }),
+        showLabelField,
+        showGridField,
       ],
     }),
     defineField({
@@ -66,20 +70,34 @@ export const barChart = defineType({
       group: 'data',
       fields: [
         labelField,
-        showLabelField,
         fontSizeField,
-        defineField({
-          name: 'labelPaddingFromLeft',
-          title: 'Label Padding From Left',
-          type: 'number'
-        }),
+        showLabelField,
+        showGridField,
       ],
+    }),
+    defineField({
+      name: 'leftMargin',
+      title: 'Left Margin',
+      type: 'number',
+      initialValue: 10,
+      group: 'styling',
+    }),
+    defineField({
+      name: 'rightMargin',
+      title: 'Right Margin',
+      type: 'number',
+      initialValue: 10,
+      group: 'styling',
     }),
     defineField({
       name: 'bars',
       title: 'Bar Styling',
       type: 'object',
+      description: 'Styling for the bars in the chart.',
       group: 'styling',
+      options: {
+        collapsible: true,
+      },
       fields: [
         defineField({
           name: 'padding',
@@ -124,28 +142,14 @@ export const barChart = defineType({
     }),
     defineField({
       name: 'background',
-      title: 'Background Styling',
-      type: 'object',
+      title: 'Background',
+      type: 'visx.backgroundStyles',
+      description: 'Background styling for the chart.',
       group: 'styling',
-      fields: [
-        defineField({
-          name: 'gradientFrom',
-          title: 'Gradient Top',
-          type: 'color',
-        }),
-        defineField({
-          name: 'gradientTo',
-          title: 'Gradient Bottom',
-          type: 'color',
-        }),
-        defineField({
-          name: 'borderRadius',
-          title: 'Border Radius',
-          type: 'number',
-          initialValue: 0,
-        }),
-      ],
-    }),
+      options: {
+        collapsible: true,
+      },
+    })
   ],
   preview: {
     select: {
