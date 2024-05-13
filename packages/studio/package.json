@@ -1,6 +1,6 @@
 {
   "name": "@sanity-visx/studio",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "keywords": [
     "sanity",
@@ -32,7 +32,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@sanity-visx/ui": "0.1.1",
+    "@sanity-visx/ui": "0.1.2",
     "@sanity/color-input": "^3.1.1",
     "@sanity/icons": "^2.11.8",
     "@sanity/incompatible-plugin": "^1.0.4",
