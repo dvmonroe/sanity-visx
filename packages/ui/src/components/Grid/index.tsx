@@ -8,7 +8,7 @@ export const Grid = ({
   width = 0,
   height = 0,
   stroke = DEFAULT_GRID_COLOR,
-  opacity = 0.5,
+  opacity = 0.3,
   orientation,
   visible = false
 }: GridProps) => {

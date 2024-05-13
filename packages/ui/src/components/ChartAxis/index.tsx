@@ -27,9 +27,11 @@ interface ChartAxisProps {
   labelColor?: string;
   labelFontSize?: number;
   labelFontFamily?: string;
+  labelSpacingX?: number;
+  labelSpacingY?: number;
 }
 
-export const ChartAxis: React.FC<ChartAxisProps> = ({
+export const ChartAxis = ({
   orientation,
   scale,
   top = 0,
@@ -44,7 +46,9 @@ export const ChartAxis: React.FC<ChartAxisProps> = ({
   labelColor = DEFAULT_LABEL_COLOR,
   labelFontSize = DEFAULT_LABEL_FONT_SIZE,
   labelFontFamily = DEFAULT_LABEL_FONT_FAMILY,
-}) => (
+  labelSpacingX = 0,
+  labelSpacingY = 0,
+}: ChartAxisProps) => (
   <Axis
     orientation={orientation}
     scale={scale}
@@ -63,6 +67,8 @@ export const ChartAxis: React.FC<ChartAxisProps> = ({
       fill: labelColor,
       fontSize: labelFontSize,
       fontFamily: labelFontFamily,
+      x: labelSpacingX,
+      y: labelSpacingY,
     } : undefined}
   />
 );

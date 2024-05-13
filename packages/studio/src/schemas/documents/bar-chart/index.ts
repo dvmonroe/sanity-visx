@@ -1,13 +1,6 @@
 import { defineType, defineField } from 'sanity';
 import { BarChartIcon } from '../../../icons'
 
-import { 
-  fontSizeField,
-  labelField,
-  showGridField,
-  showLabelField,
-} from './fields';
-
 export const barChart = defineType({
   type: 'document',
   name: 'visx.barChart',
@@ -15,9 +8,17 @@ export const barChart = defineType({
   icon: BarChartIcon,
   groups: [
     {
-      name: 'data',
-      title: 'Data',
+      name: 'core',
+      title: 'Core',
       default: true,
+    },
+    {
+      name: 'xAxis',
+      title: 'X Axis',
+    },
+        {
+      name: 'yAxis',
+      title: 'Y Axis',
     },
     {
       name: 'styling',
@@ -29,7 +30,7 @@ export const barChart = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      group: 'data',
+      group: 'core',
       description: 'Title for the chart.',
       validation: (Rule: any) => Rule.required(),
     }),
@@ -37,7 +38,7 @@ export const barChart = defineType({
       name: 'caption',
       title: 'Caption',
       type: 'string',
-      group: 'data',
+      group: 'core',
       description: 'Caption for the chart.',
     }),
     defineField({
@@ -48,32 +49,20 @@ export const barChart = defineType({
       options: {
         accept: 'text/csv',
       },
-      group: 'data',
+      group: 'core',
       validation: (Rule: any) => Rule.required(),
     }),
     defineField({
       name: 'xAxis',
       title: 'X Axis',
-      type: 'object',
-      group: 'data',
-      fields: [
-        labelField,
-        fontSizeField,
-        showLabelField,
-        showGridField,
-      ],
+      type: 'visx.axis',
+      group: 'xAxis',
     }),
     defineField({
       name: 'yAxis',
       title: 'Y Axis',
-      type: 'object',
-      group: 'data',
-      fields: [
-        labelField,
-        fontSizeField,
-        showLabelField,
-        showGridField,
-      ],
+      type: 'visx.axis',
+      group: 'yAxis',
     }),
     defineField({
       name: 'leftMargin',

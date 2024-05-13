@@ -28,37 +28,20 @@ export const BarChartPreview: UserViewComponent = ({document}) => {
     return <Card></Card>
   }
 
-  const { borderRadius, gradientTop, gradientBottom} = background || {};
-  const { color, padding, usePatternLines, patternLineOrientation, verticalMargin } = bars || {};
+  const { gradientTop, gradientBottom} = background || {};
+  const { color } = bars || {};
 
   const backgroundProps = {
+    ...background,
     gradient: {
       from: gradientTop?.hex,
       to: gradientBottom?.hex,
     },
-    borderRadius: borderRadius,
   };
 
   const barsProps = {
+    ...bars,
     color: color?.hex,
-    padding: padding,
-    usePatternLines: usePatternLines,
-    patternLineOrientation: patternLineOrientation,
-    verticalMargin: verticalMargin,
-  };
-
-  const xAxisProps = {
-    label: xAxis.label,
-    showLabel: xAxis.showLabel,
-    fontSize: xAxis.fontSize,
-    showGrid: xAxis.showGrid,
-  };
-
-  const yAxisProps = {
-    label: yAxis.label,
-    showLabel: yAxis.showLabel,
-    fontSize: yAxis.fontSize,
-    showGrid: yAxis.showGrid,
   };
 
   return (
@@ -71,8 +54,8 @@ export const BarChartPreview: UserViewComponent = ({document}) => {
         rightMargin={rightMargin}
         background={backgroundProps}
         bars={barsProps}
-        xAxis={xAxisProps}
-        yAxis={yAxisProps}
+        xAxis={xAxis}
+        yAxis={yAxis}
       />
     </Card>
   )

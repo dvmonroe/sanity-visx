@@ -3,6 +3,8 @@ interface Axis {
   showLabel?: boolean;
   fontSize?: number;
   showGrid?: boolean;
+  labelSpacingX?: number;
+  labelSpacingY?: number;
 }
 
 interface Background {

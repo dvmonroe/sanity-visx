@@ -83,11 +83,15 @@ export const BarChart = ({
           orientation={Orientation.bottom}
           scale={xScale}
           top={yMax}
+          labelSpacingX={xAxis.labelSpacingX ?? (width / 2) - leftMargin}
+          labelSpacingY={xAxis.labelSpacingY ?? 40}
           {...xAxis}
         />
         <ChartAxis
           orientation={Orientation.left}
           scale={yScale}
+          labelSpacingX={yAxis.labelSpacingX ?? bars.verticalMargin + 20}
+          labelSpacingY={yAxis.labelSpacingY ?? -40}
           {...yAxis}
         />
       </Group>

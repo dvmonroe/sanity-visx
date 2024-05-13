@@ -21,5 +21,5 @@ export const backgroundStyles = defineType({
       type: 'number',
       initialValue: 0,
     }),
-  ],
+  ].sort((a, b) => a.name.localeCompare(b.name)),
 })
