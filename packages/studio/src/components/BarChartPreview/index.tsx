@@ -73,7 +73,7 @@ export const BarChartPreview: UserViewComponent = ({document}) => {
         background={backgroundProps}
         bars={barsProps}
         xAxis={xAxisProps}
-        yAxis={yAxis}
+        yAxis={yAxisProps}
       />
     </Card>
   )
